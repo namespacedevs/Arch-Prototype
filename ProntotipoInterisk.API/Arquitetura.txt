@@ -1,0 +1,1 @@
+﻿https://docs.microsoft.com/pt-br/dotnet/standard/modern-web-apps-azure-architecture/common-web-application-architectures
