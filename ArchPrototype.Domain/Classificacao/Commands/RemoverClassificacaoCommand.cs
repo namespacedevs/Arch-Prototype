@@ -1,15 +1,16 @@
-﻿using MediatR;
+﻿using ArchPrototype.Domain.Core.Models;
 using ArchPrototype.Domain.Core.Pipeline;
+using MediatR;
 
-namespace PrototipoInterisk.Domain.Classificacao.Commands
+namespace ArchPrototype.Domain.Classificacao.Commands
 {
     public class RemoverClassificacaoCommand : IRequest<Response>
     {
         public RemoverClassificacaoCommand(int id)
         {
-            this.Id = id;
+            Id = id;
         }
 
-        public int Id { get; private set; }
+        public int Id { get; }
     }
 }

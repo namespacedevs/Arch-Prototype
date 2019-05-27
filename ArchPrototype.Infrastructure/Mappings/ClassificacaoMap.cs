@@ -1,5 +1,5 @@
-﻿using PrototipoInterisk.Domain.Classificacao;
-using System.Data.Entity.ModelConfiguration;
+﻿using System.Data.Entity.ModelConfiguration;
+using ArchPrototype.Domain.Classificacao;
 
 namespace ArchPrototype.Infrastructure.Mappings
 {

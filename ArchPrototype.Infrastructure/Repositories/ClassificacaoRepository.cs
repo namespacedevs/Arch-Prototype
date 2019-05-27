@@ -1,6 +1,6 @@
-﻿using ArchPrototype.Infrastructure.Contexts;
-using PrototipoInterisk.Domain.Classificacao;
-using PrototipoInterisk.Domain.Classificacao.Contracts;
+﻿using ArchPrototype.Domain.Classificacao;
+using ArchPrototype.Domain.Classificacao.Contracts;
+using ArchPrototype.Infrastructure.Contexts;
 
 namespace ArchPrototype.Infrastructure.Repositories
 {
