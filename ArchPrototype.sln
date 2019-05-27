@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2041
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchPrototype.API", "ProntotipoInterisk.API\ArchPrototype.API.csproj", "{0A7510F4-0DDA-4A9A-B484-325862804501}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchPrototype.API", "ArchPrototype.API\ArchPrototype.API.csproj", "{0A7510F4-0DDA-4A9A-B484-325862804501}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchPrototype.Infrastructure", "ArchPrototype.Infrastructure\ArchPrototype.Infrastructure.csproj", "{1E2BB991-AEA3-4C4B-B2EB-7681ECDFE4BA}"
 EndProject

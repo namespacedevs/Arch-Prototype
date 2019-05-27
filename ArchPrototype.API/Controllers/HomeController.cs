@@ -11,6 +11,9 @@ namespace ProntotipoInterisk.API.Controllers
 
         [HttpGet]
         [Route("")]
-        public object Get() => new { version = "Version 1.0" };
+        public object Get()
+        {
+            return new {version = "Version 1.0"};
+        }
     }
 }

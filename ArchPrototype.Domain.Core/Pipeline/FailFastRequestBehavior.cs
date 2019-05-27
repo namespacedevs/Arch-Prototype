@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using ArchPrototype.Domain.Core.Models;
 using FluentValidation;
 using FluentValidation.Results;
 using MediatR;
@@ -18,7 +19,8 @@ namespace ArchPrototype.Domain.Core.Pipeline
             _validators = validators;
         }
 
-        public Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
+        public Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken,
+            RequestHandlerDelegate<TResponse> next)
         {
             var failures = _validators
                 .Select(v => v.Validate(request))
@@ -36,9 +38,7 @@ namespace ArchPrototype.Domain.Core.Pipeline
             var response = new Response();
 
             foreach (var failure in failures)
-            {
                 response.AddError(new Notification(failure.PropertyName, failure.ErrorMessage));
-            }
 
             return Task.FromResult(response as TResponse);
         }

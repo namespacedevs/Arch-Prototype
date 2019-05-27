@@ -1,17 +1,17 @@
-﻿using FluentValidation;
-using MediatR;
-using PrototipoInterisk.Domain.Classificacao.Contracts;
-using ArchPrototype.Domain.Core.Pipeline;
-using ArchPrototype.Infrastructure.Contexts;
-using ArchPrototype.Infrastructure.Repositories;
-using SimpleInjector;
-using SimpleInjector.Integration.WebApi;
-using SimpleInjector.Lifestyles;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Web.Http;
+using ArchPrototype.Domain.Core.Pipeline;
+using ArchPrototype.Infrastructure.Contexts;
+using ArchPrototype.Infrastructure.Repositories;
+using FluentValidation;
+using MediatR;
+using ArchPrototype.Domain.Classificacao.Contracts;
+using SimpleInjector;
+using SimpleInjector.Integration.WebApi;
+using SimpleInjector.Lifestyles;
 
 namespace ProntotipoInterisk.API.App_Start
 {
@@ -31,7 +31,8 @@ namespace ProntotipoInterisk.API.App_Start
             const string applicationAssemblyName = "ArchPrototype.Domain";
             var assembly = AppDomain.CurrentDomain.Load(applicationAssemblyName);
 
-            var assembliesValidators = AssemblyScanner.FindValidatorsInAssembly(assembly).Select(x => x.ValidatorType.Assembly).ToArray();
+            var assembliesValidators = AssemblyScanner.FindValidatorsInAssembly(assembly)
+                .Select(x => x.ValidatorType.Assembly).ToArray();
             container.Collection.Register(typeof(IValidator<>), assembliesValidators);
 
             RegisterMediator(container, assembly);
@@ -42,25 +43,26 @@ namespace ProntotipoInterisk.API.App_Start
 
         private static void RegisterMediator(Container container, params Assembly[] assemblies)
         {
-            var allAssemblies = new List<Assembly> { typeof(IMediator).GetTypeInfo().Assembly };
+            var allAssemblies = new List<Assembly> {typeof(IMediator).GetTypeInfo().Assembly};
             allAssemblies.AddRange(assemblies);
 
             container.RegisterSingleton<IMediator, Mediator>();
             container.Register(typeof(IRequestHandler<,>), allAssemblies);
 
             // we have to do this because by default, generic type definitions (such as the Constrained Notification Handler) won't be registered
-            var notificationHandlerTypes = container.GetTypesToRegister(typeof(INotificationHandler<>), assemblies, new TypesToRegisterOptions
-            {
-                IncludeGenericTypeDefinitions = true,
-                IncludeComposites = false,
-            });
+            var notificationHandlerTypes = container.GetTypesToRegister(typeof(INotificationHandler<>), assemblies,
+                new TypesToRegisterOptions
+                {
+                    IncludeGenericTypeDefinitions = true,
+                    IncludeComposites = false
+                });
             container.Register(typeof(INotificationHandler<>), notificationHandlerTypes);
 
             container.Collection.Register(typeof(IPipelineBehavior<,>), new[]
             {
                 //typeof(RequestPreProcessorBehavior<,>),
                 //typeof(RequestPostProcessorBehavior<,>),
-                typeof(FailFastRequestBehavior<,>),
+                typeof(FailFastRequestBehavior<,>)
             });
 
             //container.Collection.Register(typeof(IRequestPreProcessor<>), new[] { typeof(GenericRequestPreProcessor<>) });

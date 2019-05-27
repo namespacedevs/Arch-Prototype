@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
-using PrototipoInterisk.Domain.Classificacao.Commands;
 
-namespace PrototipoInterisk.ApplicationCore.Classificacao.Commands.Validators
+namespace ArchPrototype.Domain.Classificacao.Commands.Validators
 {
     public class ObterClassificacaoValidator : AbstractValidator<ObterClassificacaoCommand>
     {

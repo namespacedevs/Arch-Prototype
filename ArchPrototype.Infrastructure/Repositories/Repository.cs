@@ -34,7 +34,7 @@ namespace ArchPrototype.Infrastructure.Repositories
 
         public virtual void Update(TEntity obj)
         {
-            _context.Entry<TEntity>(obj).State = EntityState.Modified;
+            _context.Entry(obj).State = EntityState.Modified;
         }
 
         public virtual void Remove(TEntity obj)

@@ -1,11 +1,12 @@
-﻿using MediatR;
-using PrototipoInterisk.Domain.Classificacao.Commands;
-using PrototipoInterisk.Domain.Classificacao.Contracts;
-using ArchPrototype.Domain.Core.Pipeline;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
+using ArchPrototype.Domain.Classificacao.Commands;
+using ArchPrototype.Domain.Classificacao.Contracts;
+using ArchPrototype.Domain.Core.Models;
+using ArchPrototype.Domain.Core.Pipeline;
+using MediatR;
 
-namespace PrototipoInterisk.Domain.Classificacao.Handlers
+namespace ArchPrototype.Domain.Classificacao.Handlers
 {
     public class ClassificacaoHandler : IRequestHandler<ObterTodasClassificacoesCommand, Response>,
         IRequestHandler<ObterClassificacaoCommand, Response>,
@@ -20,11 +21,16 @@ namespace PrototipoInterisk.Domain.Classificacao.Handlers
             _classificacaoRepository = classificacaoRepository;
         }
 
-        public async Task<Response> Handle(ObterTodasClassificacoesCommand request, CancellationToken cancellationToken)
+        public async Task<Response> Handle(EditarClassificacaoCommand request, CancellationToken cancellationToken)
         {
-            var classificacoes = _classificacaoRepository.GetAll();
+            var classificacao = _classificacaoRepository.GetById(request.Id);
+            classificacao.Nome = request.Nome;
+            classificacao.Descricao = request.Descricao;
+            classificacao.Status = request.Status;
 
-            return new Response(classificacoes);
+            _classificacaoRepository.SaveChanges();
+
+            return new Response(classificacao);
         }
 
         public async Task<Response> Handle(ObterClassificacaoCommand request, CancellationToken cancellationToken)
@@ -34,27 +40,22 @@ namespace PrototipoInterisk.Domain.Classificacao.Handlers
             return new Response(classificacao);
         }
 
+        public async Task<Response> Handle(ObterTodasClassificacoesCommand request, CancellationToken cancellationToken)
+        {
+            var classificacoes = _classificacaoRepository.GetAll();
+
+            return new Response(classificacoes);
+        }
+
         public async Task<Response> Handle(RegistrarClassificacaoCommand request, CancellationToken cancellationToken)
         {
-            var classificacao = new Domain.Classificacao.Classificacao()
+            var classificacao = new Classificacao
             {
                 Nome = request.Nome,
-                Descricao = request.Descricao,
+                Descricao = request.Descricao
             };
 
             _classificacaoRepository.Add(classificacao);
-            _classificacaoRepository.SaveChanges();
-
-            return new Response(classificacao);
-        }
-
-        public async Task<Response> Handle(EditarClassificacaoCommand request, CancellationToken cancellationToken)
-        {
-            var classificacao = _classificacaoRepository.GetById(request.Id);
-            classificacao.Nome = request.Nome;
-            classificacao.Descricao = request.Descricao;
-            classificacao.Status = request.Status;
-
             _classificacaoRepository.SaveChanges();
 
             return new Response(classificacao);

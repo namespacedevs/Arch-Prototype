@@ -7,7 +7,7 @@
     <ProjectGuid>{06853AD0-D3DF-427C-875A-D20D625E2985}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PrototipoInterisk.Domain</RootNamespace>
+    <RootNamespace>ArchPrototype.Domain</RootNamespace>
     <AssemblyName>ArchPrototype.Domain</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

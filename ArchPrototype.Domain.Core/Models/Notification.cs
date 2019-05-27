@@ -1,4 +1,4 @@
-﻿namespace ArchPrototype.Domain.Core.Pipeline
+﻿namespace ArchPrototype.Domain.Core.Models
 {
     public class Notification
     {
@@ -8,7 +8,7 @@
             Message = message;
         }
 
-        public string Property { get; private set; }
-        public string Message { get; private set; }
+        public string Property { get; }
+        public string Message { get; }
     }
 }

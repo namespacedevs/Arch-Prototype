@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
-using PrototipoInterisk.Domain.Classificacao.Commands;
 
-namespace PrototipoInterisk.ApplicationCore.Classificacao.Commands.Validators
+namespace ArchPrototype.Domain.Classificacao.Commands.Validators
 {
     public class EditarClassificacaoValidator : AbstractValidator<EditarClassificacaoCommand>
     {
@@ -18,7 +17,7 @@ namespace PrototipoInterisk.ApplicationCore.Classificacao.Commands.Validators
                 .WithMessage("A descrição é obrigatória.")
                 .MinimumLength(1)
                 .WithMessage("A descrição deve possuir no mínimo 1 caractere.");
-            
+
             RuleFor(a => a.Status)
                 .IsInEnum()
                 .WithMessage("O status é obrigatória.");
