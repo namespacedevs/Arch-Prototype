@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Principal;
 using Arch_Prototype.Domain.Auth;
+using Arch_Prototype.Infra.Data.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -14,6 +15,13 @@ namespace Arch_Prototype.Application.Controllers
     [Route("v1/[controller]")]
     public class LoginController : ControllerBase
     {
+        private readonly IBaseRepository<User> _userRepository;
+        
+        public LoginController(IBaseRepository<User> userRepository)
+        {
+            _userRepository = userRepository;
+        }
+        
         [AllowAnonymous]
         [HttpPost]
         public IActionResult Login([FromBody] LoginViewModel user)
@@ -68,7 +76,7 @@ namespace Arch_Prototype.Application.Controllers
                 return Unauthorized(response.message);
             }
         }
-
+        
         private static bool ValidateCredentials(LoginViewModel user)
         {
             if (user == null || string.IsNullOrWhiteSpace(user.Email)) return false;
